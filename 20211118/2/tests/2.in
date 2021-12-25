@@ -1,0 +1,8 @@
+class C:
+    num = Num()
+
+v = [C() for i in range(10)]
+for i, c in enumerate(v):
+    c.num = i if i % 2 else v[i:]
+
+print([c.num for c in v])

@@ -1,0 +1,25 @@
+class C(int, metaclass=dump):
+    def __init__(self, val):
+        self.val = val
+
+    def __add__(self, other):
+        return C(self.val + other // 2)
+
+    def ask(self, *, where='nowhere', what='nothing'):
+        if where == 'nowhere' and what == 'nothing':
+            return 'nothing to answer';
+        if where == 'nowhere' and what == 'question of life':
+            return 'i dont know what are you talking about'
+        if where == 'here' and what == 'nothing':
+            return 'nothing is nothing, even nothing is not nothing but something'
+        if where == 'here' and what == 'question of life':
+            return '42' if self.val == 42 else 'what?'
+
+a = C(10)
+print(a)
+print(a.ask())
+print(a + 10)
+print(a.ask(where='here'))
+print(a.ask(what='question of life'))
+print(a.ask(where='here', what='question of life'))
+print((a + 64).ask(where='here', what='question of life'))

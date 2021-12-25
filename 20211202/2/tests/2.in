@@ -1,0 +1,12 @@
+class C(metaclass=check):
+    A: int = 10
+    C: list
+
+c = C()
+print(c.check_annotations())
+
+c.C = .1
+print(c.check_annotations())
+
+c.C = [.2, .3]
+print(c.check_annotations())

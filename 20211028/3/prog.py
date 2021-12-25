@@ -1,0 +1,1 @@
+print(', '.join(sorted(list(set(list(filter(lambda el: el.count('TOR') == 2, [''.join(el) for el in __import__('itertools').product('TOR', repeat=int(input()))])))))))

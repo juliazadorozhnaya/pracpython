@@ -1,0 +1,17 @@
+__init__: (10,), {}
+10
+ask: (), {}
+nothing to answer
+__add__: (10,), {}
+__init__: (15,), {}
+15
+ask: (), {'where': 'here'}
+nothing is nothing, even nothing is not nothing but something
+ask: (), {'what': 'question of life'}
+i dont know what are you talking about
+ask: (), {'where': 'here', 'what': 'question of life'}
+what?
+__add__: (64,), {}
+__init__: (42,), {}
+ask: (), {'where': 'here', 'what': 'question of life'}
+42

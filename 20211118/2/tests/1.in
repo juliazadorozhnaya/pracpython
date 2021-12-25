@@ -1,0 +1,13 @@
+class C:
+    num = Num()
+ 
+print(C().num)
+c, d = C(), C()
+a = 1234567
+c.num = a
+d.num = str(a)
+print(c.num, d.num)
+b = eval("5**3")
+c.num = b
+d.num = str(b)
+print(c.num, d.num)

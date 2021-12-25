@@ -1,0 +1,15 @@
+class myint(int):
+    pass
+
+class C(metaclass=check):
+    A: int = 10
+    B: myint
+
+c = C()
+print(c.check_annotations())
+
+c.B = myint(10)
+print(c.check_annotations())
+
+c.B = int(10)
+print(c.check_annotations())
