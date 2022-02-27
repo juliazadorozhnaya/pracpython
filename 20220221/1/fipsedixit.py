@@ -18,12 +18,11 @@ elif sys.argv[2] in defaults or os.path.isfile(sys.argv[2]):
             with open(sys.argv[2], 'rt') as word_base:
                 text = word_base.read()
         except FileNotFoundError as E:
-            print("Error! This file does not exist")
+            print("This file does not exist")
             sys.exit()
     generator = ipsedixit.Generator(text)
     sys.argv.pop(2)
 else:
     generator = ipsedixit.Generator()
 args = ipsedixit.parse_args()
-
 print('\n\n'.join(generator.paragraphs(args.num, args.min, args.max)))
