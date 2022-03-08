@@ -38,3 +38,17 @@ def is_tree(obj_id):
         return obj_type == b'tree'
 
 
+def print_commit_tree(tree_id, indent=1):
+    tree_path = join(objects_path, tree_id[:2], tree_id[2:])
+    with open(tree_path, 'rb') as tree_file:
+        tree = zlib.decompress(tree_file.read())
+        header, _, body = tree.partition(b'\x00')
+        _, size = header.split()
+        while body:
+            treehdr, _, treetail = body.partition(b'\x00')
+            git_id, body = treetail[:20], treetail[20:]
+            treehdr = treehdr.decode()
+            print(f'{"|" + "-" * indent + ">"}{treehdr}, {git_id.hex()}')
+            if is_tree(git_id.hex()):
+                print_commit_tree(git_id.hex(), indent + 1)
+
