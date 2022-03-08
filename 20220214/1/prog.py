@@ -52,3 +52,8 @@ def print_commit_tree(tree_id, indent=1):
             if is_tree(git_id.hex()):
                 print_commit_tree(git_id.hex(), indent + 1)
 
+
+if len(sys.argv) == 1:
+    print_branches()
+elif len(sys.argv) == 2:
+    print_commit(get_head_commit_id(sys.argv[1]))
