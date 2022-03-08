@@ -1,6 +1,11 @@
 import sys
-from shlex import join
 import zlib
+from os import listdir
+from os.path import join
+
+git_path = '.git'
+objects_path = join(git_path, 'objects')
+heads_path = join(git_path, 'refs', 'heads')
 
 
 def print_branches():
