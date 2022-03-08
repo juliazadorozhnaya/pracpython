@@ -12,6 +12,7 @@ def dist(s1, s2, s3):
 
 s1 = input()
 s2 = input()
+
 s3 = input()
 
 with mp.Pool(processes=1) as pool:
@@ -20,6 +21,4 @@ with mp.Pool(processes=1) as pool:
         print(process.get(timeout=1))
     except mp.context.TimeoutError:
         print(-1)
-
-
 
