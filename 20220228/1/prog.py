@@ -1,4 +1,5 @@
 import textdistance as td
+import multiprocessing as mp
 
 
 def dist(s1, s2, s3):
@@ -12,4 +13,10 @@ def dist(s1, s2, s3):
 s1 = input()
 s2 = input()
 s3 = input()
-res = dist(s1, s2, s3)
+
+with mp.Pool(processes=1) as pool:
+    process = pool.apply_async(dist, (s1, s2, s3))
+    
+
+
+
