@@ -29,3 +29,12 @@ def print_commit(commit_id):
             parent_commit_id = body.split('parent ')[1].split()[0].replace(',', '')
             print_commit(parent_commit_id)
 
+
+def is_tree(obj_id):
+    with open(join(objects_path, obj_id[:2], obj_id[2:]), 'rb') as obj_file:
+        obj = zlib.decompress(obj_file.read())
+        header, _, _ = obj.partition(b'\x00')
+        obj_type, _ = header.split()
+        return obj_type == b'tree'
+
+
