@@ -3,7 +3,7 @@
 
 import shlex
 import cmd
-from monster import Monster
+from MUD.create import Monster
 
 
 class Dungeon(cmd.Cmd):
