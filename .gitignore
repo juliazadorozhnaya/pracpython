@@ -4,3 +4,5 @@
 **/_templates/
 **/html/
 **/darkness/
+**/Pipfile
+**/Pipfile.lock
