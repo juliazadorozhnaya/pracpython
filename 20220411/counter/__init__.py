@@ -1,10 +1,10 @@
 import gettext
 
 translation = gettext.translation("counter", "po", fallback=True)
-_, ngettext = translation.gettext, translation.ngettext
-
+_ = translation.gettext
+ngettext = translation.ngettext
 
 def dialog():
     while s := input(_("Input a string: ")):
         n = len(s.split())
-        print(ngettext("{} word entered", "{} words entered", n).format(n))
+        print(ngettext("{s} word entered", "{s} words entered", n).format(s=n))
