@@ -29,7 +29,7 @@ def make_test(coefficient, true_answer):
 class TestSolver(unittest.TestCase):
     
     def test_above_zero(self):
-        make_test((1, -3, 2), (1.0, 2.0))
+        make_test((1, 5, 4), (-4.0, -1.0))
 
     def test_equal_zero(self):
         make_test((1, -4, 4), (2.0, 2.0))
