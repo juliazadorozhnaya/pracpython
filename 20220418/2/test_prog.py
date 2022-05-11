@@ -48,3 +48,5 @@ class TestSolver(unittest.TestCase):
 
     def test_wrong_input(self):
         make_test((1, "-1-", 0), "wrong number entered")
+        
+        
