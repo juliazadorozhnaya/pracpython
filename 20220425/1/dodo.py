@@ -1,11 +1,10 @@
-DOIT_CONFIG = {"default_tasks": ['extract', 'update', 'compile', 'tests']}
+import glob
+import shutil
 
-def task_extract():
-    """Extracts the translation."""
-    return {
-        "actions": ["pybabel extract -o po/solve.pot solve"],
-        "targets": ["po/solve.pot"]
-    }
+def task_test():
+    """Preform tests."""
+    return {'actions': ['python3 -m unittest']}
+
 
 def task_update():
     """Updates the translation."""
@@ -13,7 +12,7 @@ def task_update():
         "actions": ["pybabel update -D solve -i po/solve.pot -d po -l ru",
                     "pybabel update -D solve -i po/solve.pot -d po -l en"],
         "file_dep": ["po/solve.pot"],
-        "targets": ["po/ru/LC_MESSAGES/solve.po"]
+        "targets": ["po/en/LC_MESSAGES/solve.po"]
     }
 
 def task_compile():
@@ -24,22 +23,29 @@ def task_compile():
         "targets": ["po/ru/LC_MESSAGES/solve.mo"]
     }
 
-def task_tests():
-    """Tests the module."""
+    
+def task_cleanup():
+    """Clearing all generations include, translation template."""
     return {
-        "actions": ["python3 -m test_equ -v"]
+        "action": [
+            (shutil.rmtree("/_build", ignore_errors=True)),
+        ]
     }
 
 
-def task_translation():
-    """Update and compile translation"""
-    domain = "prog"
+def task_wheel():
+    """Wheel builds using build."""
     return {
-        'actions': [f"pybabel extract --output-file={domain}.pot --input-dirs={domain}.py",
-                    f"pybabel update --domain={domain} --input-file={domain}.pot --output-dir=po --locale=ru",
-                    f"pybabel compile --domain={domain} --directory=po --locale=ru"],
-        'targets': [f'{domain}.pot', f'po/ru/LC_MESSAGES/{domain}.mo'],
-        'file_dep': [f"{domain}.py"],
-        'clean': True
+        'actions': ['python -m build -w'],
+        'file_dep': ['solve', 'po/ru/LC_MESSAGES/prog.mo'],
+        'targets': ['dist/prog-0.0.1-py3-none-any.whl']
     }
 
+
+def task_sdist():
+    """Building an archive with sources using build."""
+    return {
+        'actions': ['python -m build -s'],
+        'file_dep': ['solve', 'po/ru/LC_MESSAGES/prog.mo'],
+        'targets': ['dist/prog-0.0.1.tar.gz']
+    }
