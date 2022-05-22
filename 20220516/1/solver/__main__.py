@@ -1,9 +1,23 @@
-from . import solve, fig
+import locale
 import gettext
-import os
+import pyfiglet
+from . import solve
 
-gettext.install("solve", "po")
+locale.setlocale(locale.LC_ALL, locale.getlocale())
+translation = gettext.translation('solver', 'po', fallback=True)
+_ = translation.gettext
 
+def main():
+    a, b = map(float, input(_("Input a b: ")).split())
+    res = solve(a,b)
+    style = pyfiglet.Figlet(font='graceful')
 
-a, b = map(float, input(_("Input a b: ")).split())
-print(fig(solve(a, b)))
+    if res is None:
+        words = _("NO ROOT")
+        print(style.renderText(words))
+    else:
+        word = _("Root: {}").format(res)
+        print(style.renderText(word))
+
+if __name__ == "__main__":
+    main()
