@@ -1,5 +1,5 @@
 import unittest
-from solve import solve 
+from solver import solve 
 
 class TestEqu(unittest.TestCase):
     numbers = []

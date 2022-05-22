@@ -6,46 +6,57 @@ def task_test():
     return {'actions': ['python3 -m unittest']}
 
 
-def task_update():
-    """Updates the translation."""
+def task_extract():
+    """
+    Extract the translation.
+    """
     return {
-        "actions": ["pybabel update -D solve -i po/solve.pot -d po -l ru",
-                    "pybabel update -D solve -i po/solve.pot -d po -l en"],
-        "file_dep": ["po/solve.pot"],
-        "targets": ["po/en/LC_MESSAGES/solve.po"]
+        "actions": ["pybabel extract -o po/solver.pot solver", "pybabel init -D solver -i po/solver.pot -d po -l ru",
+        "pybabel init -D solver -i po/solver.pot -d po -l en"],
+        "targets": ["po/solver.pot"]
+    }
+
+def task_update():
+    """
+    Update the translation.
+    """
+    return {
+        "actions": ["pybabel update -D solver -i po/solver.pot -d po -l ru",
+                    "pybabel update -D solver -i po/solver.pot -d po -l en"],
+        "file_dep": ["po/solver.pot"],
+        "targets": ["po/ru/LC_MESSAGES/solver.po"]
     }
 
 def task_compile():
-    """Compiles the translation."""
+    """
+    Compile the translation.
+    """
     return {
-        "actions": ["pybabel compile -D solve -d po -l ru",
-                    "pybabel compile -D solve -d po -l en"],
-        "targets": ["po/ru/LC_MESSAGES/solve.mo"]
-    }
-
-    
-def task_cleanup():
-    """Clearing all generations include, translation template."""
-    return {
-        "action": [
-            (shutil.rmtree("/_build", ignore_errors=True)),
-        ]
+        "actions": ["pybabel compile -D solver -d po -l ru",
+                    "pybabel compile -D solver -d po -l en"],
+        "targets": ["po/ru/LC_MESSAGES/solver.mo"]
     }
 
 
 def task_wheel():
-    """Wheel builds using build."""
+    """Create wheel."""
     return {
-        'actions': ['python -m build -w'],
-        'file_dep': ['solve', 'po/ru/LC_MESSAGES/prog.mo'],
-        'targets': ['dist/prog-0.0.1-py3-none-any.whl']
+            "actions": ['python3 -m build -w'],
+            "file_dep": ["solver", "po/ru/LC_MESSAGES/solver.mo"],
     }
-
 
 def task_sdist():
-    """Building an archive with sources using build."""
+    """Build a cdist"""
     return {
-        'actions': ['python -m build -s'],
-        'file_dep': ['solve', 'po/ru/LC_MESSAGES/prog.mo'],
-        'targets': ['dist/prog-0.0.1.tar.gz']
+        "actions": ["python3 -m build -s"],
+        "file_dep": ["task.py", "po/ru/LC_MESSAGES/solver.mo"],
+        "targets": ["dist/solver-0.0.1.tar.gz"]
     }
+
+
+def task_cleanup():
+    """Remove all."""
+    return {
+            "actions": ["rm -f po/solver.pot", "rm -f po/ru/LC_MESSAGES/solver.mo", "rm -f po/en/LC_MESSAGES/solver.mo"],
+   }
+
