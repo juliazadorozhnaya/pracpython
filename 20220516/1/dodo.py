@@ -41,15 +41,16 @@ def task_compile():
 def task_wheel():
     """Create wheel."""
     return {
-            "actions": ['python3 -m build -w'],
-            "file_dep": ["solver", "po/ru/LC_MESSAGES/solver.mo"],
+        "actions": ["python3 -m build -w"],
+        "file_dep": ["solver", "po/ru/LC_MESSAGES/solver.mo"],
+        "targets": ["dist/solver-0.0.1-heh.whl"]
     }
 
 def task_sdist():
     """Build a cdist"""
     return {
         "actions": ["python3 -m build -s"],
-        "file_dep": ["task.py", "po/ru/LC_MESSAGES/solver.mo"],
+        "file_dep": ["solver", "po/ru/LC_MESSAGES/solver.mo"],
         "targets": ["dist/solver-0.0.1.tar.gz"]
     }
 

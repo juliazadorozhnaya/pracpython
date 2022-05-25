@@ -1,0 +1,12 @@
+MANIFEST.in
+pyproject.toml
+setup.cfg
+po/en/LC_MESSAGES/solver.po
+po/ru/LC_MESSAGES/solver.po
+solver/__init__.py
+solver/__main__.py
+solver.egg-info/PKG-INFO
+solver.egg-info/SOURCES.txt
+solver.egg-info/dependency_links.txt
+solver.egg-info/requires.txt
+solver.egg-info/top_level.txt
